@@ -586,7 +586,17 @@
             }
         }
             
-        
+        document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+
+    // prevenim re-spin dacă roata este deja în mișcare
+    if (!isSpinning) {
+      startSpin(); // sau spinWheel(), sau ce funcție folosești tu
+    }
+  }
+});
+
 
 
     </script>
