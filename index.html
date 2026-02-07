@@ -584,26 +584,10 @@
             if (event.target == loserModal) {
                 loserModal.style.display = 'none';
             }
-        }let isSpinning = false;
+        }
+            
+        
 
-function startSpin() {
-  if (isSpinning) return;
-
-  isSpinning = true;
-
-  // logica ta de spin aici
-
-  setTimeout(() => {
-    isSpinning = false;
-  }, 5000); // durata animației roții
-}
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    startSpin();
-  }
-});
 
     </script>
 </body>
