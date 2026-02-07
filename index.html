@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tombola The Flower Station</title>
+    <title>Roata Norocului - The Flower Station</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -15,98 +14,46 @@
 
         body {
             font-family: 'Lato', sans-serif;
-            background: linear-gradient(135deg, #fdf5f8 0%, #f8f4f0 100%);
+            background: linear-gradient(135deg, #f5f0ed 0%, #fdfbfa 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Floral decorations */
-        body::before,
-        body::after {
-            content: '🌸';
-            position: fixed;
-            font-size: 60px;
-            opacity: 0.15;
-            z-index: 0;
-        }
-
-        body::before {
-            top: 20px;
-            left: 20px;
-            transform: rotate(-15deg);
-        }
-
-        body::after {
-            bottom: 20px;
-            right: 20px;
-            transform: rotate(15deg);
         }
 
         .container {
             text-align: center;
-            background: white;
-            padding: 50px 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 1;
-            border: 2px solid #f4e4e9;
+            max-width: 800px;
+            width: 100%;
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
+            font-size: 3em;
             color: #d4a5a5;
             margin-bottom: 10px;
-            font-size: 2.8em;
-            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .subtitle {
             font-family: 'Lato', sans-serif;
+            font-size: 1.2em;
             color: #8b9467;
-            font-size: 1.1em;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-weight: 300;
-            letter-spacing: 1px;
         }
 
         .wheel-container {
             position: relative;
             width: 500px;
             height: 500px;
-            margin: 0 auto 30px;
-        }
-
-        .wheel {
-            width: 100%;
-            height: 100%;
-            transition: transform 6s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-        }
-
-        .wheel svg {
-            filter: drop-shadow(0 15px 35px rgba(212, 165, 165, 0.3));
-        }
-
-        .wheel-text {
-            font-size: 19px;
-            font-weight: 700;
-            fill: #2c3e50;
-            text-anchor: middle;
-            dominant-baseline: middle;
-            font-family: 'Lato', sans-serif;
-            stroke: white;
-            stroke-width: 2px;
-            paint-order: stroke fill;
+            margin: 0 auto 40px;
         }
 
         .arrow {
             position: absolute;
-            top: -20px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
@@ -115,41 +62,55 @@
             border-right: 25px solid transparent;
             border-top: 50px solid #d4a5a5;
             z-index: 10;
-            filter: drop-shadow(0 3px 8px rgba(212, 165, 165, 0.4));
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            transition: transform 5.5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+            box-shadow: 0 10px 40px rgba(212, 165, 165, 0.3);
+        }
+
+        .wheel-text {
+            font-family: 'Lato', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            fill: #2c3e50;
+            stroke: white;
+            stroke-width: 2px;
+            paint-order: stroke fill;
+            text-anchor: middle;
         }
 
         .spin-button {
-            background: linear-gradient(135deg, #d4a5a5 0%, #c89595 100%);
+            background: linear-gradient(135deg, #8b9467 0%, #7a8359 100%);
             color: white;
             border: none;
             padding: 18px 50px;
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 1.3em;
+            font-weight: 700;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 8px 20px rgba(212, 165, 165, 0.3);
+            box-shadow: 0 6px 20px rgba(139, 148, 103, 0.4);
             font-family: 'Lato', sans-serif;
-            letter-spacing: 1px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .spin-button:hover {
+        .spin-button:hover:not(:disabled) {
             transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(212, 165, 165, 0.4);
-            background: linear-gradient(135deg, #c89595 0%, #d4a5a5 100%);
-        }
-
-        .spin-button:active {
-            transform: translateY(0);
+            box-shadow: 0 10px 30px rgba(139, 148, 103, 0.5);
         }
 
         .spin-button:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -159,12 +120,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.6);
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
@@ -193,7 +149,7 @@
 
         @keyframes slideIn {
             from {
-                transform: translateY(-80px);
+                transform: translateY(-100px);
                 opacity: 0;
             }
             to {
@@ -202,35 +158,34 @@
             }
         }
 
-        .modal-content h2 {
-            font-family: 'Playfair Display', serif;
-            color: #d4a5a5;
+        .flower-emoji {
+            font-size: 80px;
             margin-bottom: 20px;
-            font-size: 2.3em;
-            font-weight: 700;
+            animation: bounce 1s infinite;
         }
 
-        .modal-content.winner h2 {
-            color: #8b9467;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
-        .modal-content.loser h2 {
-            color: #c89595;
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #d4a5a5;
         }
 
         .prize {
-            font-size: 2.8em;
+            font-size: 2.5em;
             font-weight: 700;
-            color: #d4a5a5;
-            margin: 25px 0;
-            font-family: 'Playfair Display', serif;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .modal-content p {
-            font-family: 'Lato', sans-serif;
-            color: #666;
-            line-height: 1.6;
+            color: #8b9467;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #f4e4e9 0%, #ffffff 100%);
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 3px dashed #d4a5a5;
         }
 
         .form-group {
@@ -238,81 +193,64 @@
             text-align: left;
         }
 
-        .form-group label {
+        label {
             display: block;
             margin-bottom: 8px;
-            color: #555;
             font-weight: 600;
-            font-size: 15px;
-            font-family: 'Lato', sans-serif;
+            color: #666;
         }
 
-        .form-group input {
+        input {
             width: 100%;
-            padding: 14px;
-            border: 2px solid #f4e4e9;
+            padding: 15px;
+            border: 2px solid #e8d5c4;
             border-radius: 12px;
-            font-size: 16px;
+            font-size: 1em;
             transition: all 0.3s;
             font-family: 'Lato', sans-serif;
-            background: #fdfcfc;
         }
 
-        .form-group input:focus {
+        input:focus {
             outline: none;
             border-color: #d4a5a5;
-            background: white;
             box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1);
         }
 
         .modal-button {
-            background: linear-gradient(135deg, #8b9467 0%, #7a8359 100%);
+            background: linear-gradient(135deg, #d4a5a5 0%, #c89595 100%);
             color: white;
             border: none;
             padding: 15px 40px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 700;
+            border-radius: 25px;
             cursor: pointer;
-            margin-top: 25px;
             transition: all 0.3s;
-            font-family: 'Lato', sans-serif;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            box-shadow: 0 5px 15px rgba(139, 148, 103, 0.3);
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(212, 165, 165, 0.3);
         }
 
         .modal-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(139, 148, 103, 0.4);
-        }
-
-        .flower-emoji {
-            font-size: 50px;
-            margin: 10px 0;
+            box-shadow: 0 8px 20px rgba(212, 165, 165, 0.4);
         }
 
         @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            
             .wheel-container {
                 width: 350px;
                 height: 350px;
             }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            .container {
-                padding: 30px 20px;
-            }
             
             .wheel-text {
-                font-size: 15px;
-                stroke-width: 1.5px;
+                font-size: 14px;
             }
-
+            
             .modal-content {
-                padding: 35px 25px;
+                padding: 30px 20px;
             }
         }
     </style>
@@ -321,55 +259,65 @@
     <div class="container">
         <h1>Roata Norocului</h1>
         <p class="subtitle">The Flower Station</p>
-        
+
         <div class="wheel-container">
             <div class="arrow"></div>
             <div class="wheel" id="wheel">
                 <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Outer circle border -->
+                    <!-- 10 sections wheel - Generated dynamically below -->
                     <circle cx="250" cy="250" r="248" fill="none" stroke="#d4a5a5" stroke-width="6"/>
                     
-                    <!-- Section 1: -10% (Rose Pink) -->
-                    <path d="M 250 250 L 250 2 A 248 248 0 0 1 425.7 74.3 Z" fill="#d4a5a5"/>
-                    <text x="320" y="95" class="wheel-text" transform="rotate(22.5 320 95)">-10%</text>
+                    <!-- Section 0: 15 lei -->
+                    <path d="M 250 250 L 250 2 A 248 248 0 0 1 479.4 129.8 Z" fill="#d4a5a5"/>
+                    <text x="350" y="80" class="wheel-text" transform="rotate(18 350 80)">15 lei</text>
                     
-                    <!-- Section 2: Necastigator (Soft Coral) -->
-                    <path d="M 250 250 L 425.7 74.3 A 248 248 0 0 1 498 250 Z" fill="#f5b5a8"/>
-                    <text x="405" y="180" class="wheel-text" transform="rotate(67.5 405 180)">Necâștigător</text>
+                    <!-- Section 1: Necâștigător -->
+                    <path d="M 250 250 L 479.4 129.8 A 248 248 0 0 1 479.4 370.2 Z" fill="#f5b5a8"/>
+                    <text x="430" y="250" class="wheel-text" transform="rotate(54 430 250)">Necâștigător</text>
                     
-                    <!-- Section 3: -50 lei (Dusty Rose) -->
-                    <path d="M 250 250 L 498 250 A 248 248 0 0 1 425.7 425.7 Z" fill="#e8bdc4"/>
-                    <text x="405" y="320" class="wheel-text" transform="rotate(112.5 405 320)">-50 lei</text>
+                    <!-- Section 2: 20 lei -->
+                    <path d="M 250 250 L 479.4 370.2 A 248 248 0 0 1 326.8 481.6 Z" fill="#e8bdc4"/>
+                    <text x="380" y="400" class="wheel-text" transform="rotate(90 380 400)">20 lei</text>
                     
-                    <!-- Section 4: Necastigator (Peach) -->
-                    <path d="M 250 250 L 425.7 425.7 A 248 248 0 0 1 250 498 Z" fill="#f4d4c8"/>
-                    <text x="320" y="405" class="wheel-text" transform="rotate(157.5 320 405)">Necâștigător</text>
+                    <!-- Section 3: Necâștigător -->
+                    <path d="M 250 250 L 326.8 481.6 A 248 248 0 0 1 173.2 481.6 Z" fill="#f4d4c8"/>
+                    <text x="250" y="450" class="wheel-text" transform="rotate(126 250 450)">Necâștigător</text>
                     
-                    <!-- Section 5: -20% (Warm Beige) -->
-                    <path d="M 250 250 L 250 498 A 248 248 0 0 1 74.3 425.7 Z" fill="#e8d5c4"/>
-                    <text x="180" y="405" class="wheel-text" transform="rotate(202.5 180 405)">-20%</text>
+                    <!-- Section 4: 25 lei -->
+                    <path d="M 250 250 L 173.2 481.6 A 248 248 0 0 1 20.6 370.2 Z" fill="#e8d5c4"/>
+                    <text x="120" y="400" class="wheel-text" transform="rotate(162 120 400)">25 lei</text>
                     
-                    <!-- Section 6: Necastigator (Mauve) -->
-                    <path d="M 250 250 L 74.3 425.7 A 248 248 0 0 1 2 250 Z" fill="#c89595"/>
-                    <text x="95" y="320" class="wheel-text" transform="rotate(247.5 95 320)">Necâștigător</text>
+                    <!-- Section 5: Necâștigător -->
+                    <path d="M 250 250 L 20.6 370.2 A 248 248 0 0 1 20.6 129.8 Z" fill="#c89595"/>
+                    <text x="70" y="250" class="wheel-text" transform="rotate(198 70 250)">Necâștigător</text>
                     
-                    <!-- Section 7: -100 lei (Terracotta) -->
-                    <path d="M 250 250 L 2 250 A 248 248 0 0 1 74.3 74.3 Z" fill="#b8927d"/>
-                    <text x="95" y="180" class="wheel-text" transform="rotate(292.5 95 180)">-100 lei</text>
+                    <!-- Section 6: Cutie Roshen -->
+                    <path d="M 250 250 L 20.6 129.8 A 248 248 0 0 1 173.2 18.4 Z" fill="#b8927d"/>
+                    <text x="100" y="100" class="wheel-text" transform="rotate(234 100 100)">Cutie Roshen</text>
                     
-                    <!-- Section 8: Necastigator (Lavender) -->
-                    <path d="M 250 250 L 74.3 74.3 A 248 248 0 0 1 250 2 Z" fill="#d4bfd4"/>
-                    <text x="180" y="95" class="wheel-text" transform="rotate(337.5 180 95)">Necâștigător</text>
+                    <!-- Section 7: Necâștigător -->
+                    <path d="M 250 250 L 173.2 18.4 A 248 248 0 0 1 326.8 18.4 Z" fill="#d4bfd4"/>
+                    <text x="250" y="50" class="wheel-text" transform="rotate(270 250 50)">Necâștigător</text>
+                    
+                    <!-- Section 8: 10% -->
+                    <path d="M 250 250 L 326.8 18.4 A 248 248 0 0 1 479.4 129.8 Z" fill="#f5d4c8"/>
+                    <text x="400" y="100" class="wheel-text" transform="rotate(306 400 100)">10%</text>
+                    
+                    <!-- Section 9: 15% -->
+                    <path d="M 250 250 L 479.4 129.8 A 248 248 0 0 1 250 2 Z" fill="#e8c4d4"/>
+                    <text x="350" y="80" class="wheel-text" transform="rotate(342 350 80)">15%</text>
                     
                     <!-- Separator lines -->
                     <line x1="250" y1="250" x2="250" y2="2" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="425.7" y2="74.3" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="498" y2="250" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="425.7" y2="425.7" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="250" y2="498" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="74.3" y2="425.7" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="2" y2="250" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="74.3" y2="74.3" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="479.4" y2="129.8" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="479.4" y2="370.2" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="326.8" y2="481.6" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="173.2" y2="481.6" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="20.6" y2="370.2" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="20.6" y2="129.8" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="173.2" y2="18.4" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="326.8" y2="18.4" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="479.4" y2="129.8" stroke="#f4e4e9" stroke-width="3"/>
                     
                     <!-- Center circle -->
                     <circle cx="250" cy="250" r="35" fill="white" stroke="#d4a5a5" stroke-width="4"/>
@@ -431,17 +379,23 @@
         const prizeText = document.getElementById('prizeText');
         const winnerForm = document.getElementById('winnerForm');
 
-        // Definirea secțiunilor (0-7, unde 0 este sus)
+        // Secțiunile roții - 10 secțiuni totale
+        // Pentru 70% necâștigător: 7 secțiuni necâștigător, 3 secțiuni câștigător
         const sections = [
-            { name: '-10%', isWinner: true },          // 0
-            { name: 'Necâștigător', isWinner: false }, // 1
-            { name: '-50 lei', isWinner: true },       // 2
-            { name: 'Necâștigător', isWinner: false }, // 3
-            { name: '-20%', isWinner: true },          // 4
-            { name: 'Necâștigător', isWinner: false }, // 5
-            { name: '-100 lei', isWinner: true },      // 6
-            { name: 'Necâștigător', isWinner: false }  // 7
+            { name: '15 lei', isWinner: true, type: 'lei', value: 15 },           // 0
+            { name: 'Necâștigător', isWinner: false },                            // 1
+            { name: '20 lei', isWinner: true, type: 'lei', value: 20 },           // 2
+            { name: 'Necâștigător', isWinner: false },                            // 3
+            { name: '25 lei', isWinner: true, type: 'lei', value: 25 },           // 4
+            { name: 'Necâștigător', isWinner: false },                            // 5
+            { name: 'Cutie Roshen Cherry', isWinner: true, type: 'produs', value: 0 }, // 6
+            { name: 'Necâștigător', isWinner: false },                            // 7
+            { name: '10%', isWinner: true, type: 'procent', value: 10 },          // 8
+            { name: '15%', isWinner: true, type: 'procent', value: 15 }           // 9
         ];
+        
+        // Fiecare secțiune = 360° / 10 = 36°
+        const degreesPerSection = 360 / sections.length;
 
         let currentRotation = 0;
         let isSpinning = false;
@@ -454,18 +408,30 @@
             isSpinning = true;
             spinButton.disabled = true;
 
-            // Alegem o secțiune random (0-7)
-            const winningSection = Math.floor(Math.random() * 8);
+            // Logica probabilistică: 70% necâștigător, 30% câștigător
+            const random = Math.random();
+            let winningSection;
+            
+            if (random < 0.7) {
+                // 70% chance - alege o secțiune necâștigător (1, 3, 5, 7)
+                const loserSections = [1, 3, 5, 7];
+                winningSection = loserSections[Math.floor(Math.random() * loserSections.length)];
+            } else {
+                // 30% chance - alege o secțiune câștigător (0, 2, 4, 6, 8, 9)
+                const winnerSections = [0, 2, 4, 6, 8, 9];
+                winningSection = winnerSections[Math.floor(Math.random() * winnerSections.length)];
+            }
             
             console.log('🎯 Secțiunea aleasă:', winningSection, '=', sections[winningSection].name);
-            
-            // Fiecare secțiune ocupă 45 de grade
-            const degreesPerSection = 45;
             
             // Calculăm unghiul central exact al secțiunii câștigătoare
             const sectionCenterAngle = (winningSection * degreesPerSection) + (degreesPerSection / 2);
             
             console.log('📍 Centru secțiune la:', sectionCenterAngle, '°');
+            
+            // Adăugăm 8-12 rotații complete
+            const fullRotations = 8 + Math.floor(Math.random() * 5);
+            const baseRotation = fullRotations * 360;
             
             // Rotația necesară pentru a aduce centrul la săgeată (0°)
             // Pentru a aduce unghiul X la poziția 0°, rotim cu (360 - X)
@@ -481,14 +447,13 @@
             // Calculăm diferența, asigurându-ne că rotim CW (pozitiv)
             let rotationNeeded = targetAlignment - currentAlignment;
             if (rotationNeeded < 0) {
-                rotationNeeded += 360; // Asigurăm rotație CW
+                rotationNeeded += 360;
             }
             
             console.log('🔄 Rotație necesară pentru aliniere:', rotationNeeded, '°');
             
-            // Adăugăm 8-12 rotații complete pentru efect
-            const fullRotations = 8 + Math.floor(Math.random() * 5);
-            const totalRotationToAdd = (fullRotations * 360) + rotationNeeded;
+            // Adăugăm rotațiile complete pentru efect
+            const totalRotationToAdd = baseRotation + rotationNeeded;
             
             console.log('➕ Rotație totală de adăugat:', totalRotationToAdd, '° (', fullRotations, 'rotații +', rotationNeeded, '°)');
             
@@ -520,7 +485,7 @@
                 
                 const finalModulo = currentRotation % 360;
                 console.log('🎯 Rotație finală aplicată:', currentRotation, '°');
-                console.log('🔍 Verificare:', finalModulo, '° (ar trebui să fie', targetAlignment, '°)', finalModulo === targetAlignment ? '✓' : '✗');
+                console.log('🔍 Verificare:', finalModulo, '° (ar trebui să fie', targetAlignment, '°)', Math.abs(finalModulo - targetAlignment) < 1 ? '✓' : '✗');
                 
                 wheel.style.transition = 'transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55)';
                 wheel.style.transform = `rotate(${currentRotation}deg)`;
@@ -550,6 +515,7 @@
             loserModal.style.display = 'none';
         }
 
+        // Form submission
         winnerForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -594,14 +560,14 @@
                 });
                 
                 // Arată mesaj de succes
-                alert('🎉 Felicitări!\n\nDatele tale au fost înregistrate cu succes.\nVei primi un email cu codul de reducere în maxim 24 de ore.\n\n✉️ Verifică inbox-ul (și folderul spam)!');
+                alert('🎉 Felicitări!\n\nDatele tale au fost înregistrate cu succes.\nVei primi un email cu detalii în maxim 24 de ore.\n\n✉️ Verifică inbox-ul (și folderul spam)!');
                 
                 winnerModal.style.display = 'none';
                 winnerForm.reset();
                 
             } catch (error) {
                 console.error('❌ Error:', error);
-                alert('✅ Datele tale au fost salvate!\n\nVei primi un email cu codul de reducere în curând.');
+                alert('✅ Datele tale au fost salvate!\n\nVei primi un email cu detalii în curând.');
                 winnerModal.style.display = 'none';
                 winnerForm.reset();
             } finally {
@@ -610,11 +576,10 @@
             }
         });
 
-        // Închide modalul dacă dai click în afara lui
+        // Close modals when clicking outside
         window.onclick = function(event) {
             if (event.target == winnerModal) {
                 winnerModal.style.display = 'none';
-                winnerForm.reset();
             }
             if (event.target == loserModal) {
                 loserModal.style.display = 'none';
