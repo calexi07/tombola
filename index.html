@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Roata Norocului - The Flower Station</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
@@ -121,15 +121,19 @@
             height: 100%;
             background-color: rgba(0,0,0,0.6);
             backdrop-filter: blur(5px);
+            overflow-y: auto; /* Enable scrolling */
+            padding: 20px 0; /* Add padding for mobile */
         }
 
         .modal-content {
             background: linear-gradient(135deg, #ffffff 0%, #fdf5f8 100%);
-            margin: 8% auto;
-            padding: 50px;
+            margin: 20px auto;
+            padding: 40px 30px;
             border-radius: 25px;
             width: 90%;
-            max-width: 550px;
+            max-width: 500px;
+            max-height: 90vh; /* Limit height to viewport */
+            overflow-y: auto; /* Enable internal scrolling if needed */
             text-align: center;
             animation: slideIn 0.4s;
             box-shadow: 0 15px 50px rgba(0,0,0,0.3);
@@ -215,6 +219,141 @@
             border-color: #d4a5a5;
             box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1);
         }
+        
+        .checkbox-group {
+            margin: 20px 0;
+            text-align: left;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            min-width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        .checkbox-group label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .checkbox-group a {
+            color: #d4a5a5;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        .checkbox-group a:hover {
+            color: #c89595;
+        }
+        
+        .error-message {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            display: none;
+            text-align: left;
+            line-height: 1.5;
+        }
+        
+        .error-message.show {
+            display: block;
+            animation: shake 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        .comeback-message {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            border: 2px solid #8b9467;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .comeback-message p {
+            margin: 10px 0;
+            color: #558b2f;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+        
+        .countdown-timer {
+            font-size: 2em;
+            font-weight: 700;
+            color: #8b9467;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            border: 2px solid #4caf50;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.4s;
+        }
+        
+        .success-message h3 {
+            color: #2e7d32;
+            margin: 0 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .success-message p {
+            color: #558b2f;
+            margin: 10px 0;
+            line-height: 1.7;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(212, 165, 165, 0.1);
+            border: 2px solid #d4a5a5;
+            color: #d4a5a5;
+            font-size: 24px;
+            line-height: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        
+        .modal-close:hover {
+            background: #d4a5a5;
+            color: white;
+            transform: rotate(90deg);
+        }
 
         .modal-button {
             background: linear-gradient(135deg, #d4a5a5 0%, #c89595 100%);
@@ -228,6 +367,12 @@
             transition: all 0.3s;
             margin-top: 20px;
             box-shadow: 0 5px 15px rgba(212, 165, 165, 0.3);
+            width: auto;
+        }
+        
+        .modal-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .modal-button:hover {
@@ -240,18 +385,148 @@
                 font-size: 2em;
             }
             
+            .subtitle {
+                font-size: 1em;
+            }
+            
             .wheel-container {
-                width: 350px;
-                height: 350px;
+                width: 90vw;
+                max-width: 350px;
+                height: 90vw;
+                max-height: 350px;
             }
             
             .wheel-text {
-                font-size: 14px;
+                font-size: 13px;
+                stroke-width: 1.5px;
+            }
+            
+            .spin-button {
+                padding: 15px 35px;
+                font-size: 1.1em;
             }
             
             .modal-content {
                 padding: 30px 20px;
+                margin: 10px auto;
+                width: 95%;
+                max-height: 85vh;
             }
+            
+            .modal-content::before {
+                font-size: 30px;
+                top: 15px;
+                right: 20px;
+            }
+            
+            .flower-emoji {
+                font-size: 60px;
+                margin-bottom: 15px;
+            }
+            
+            h2 {
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+            
+            .prize {
+                font-size: 2em;
+                padding: 20px;
+                margin: 20px 0;
+            }
+            
+            .form-group {
+                margin: 15px 0;
+            }
+            
+            input {
+                padding: 12px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            .modal-button {
+                padding: 12px 30px;
+                font-size: 1em;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            .checkbox-group {
+                margin: 15px 0;
+                gap: 8px;
+            }
+            
+            .checkbox-group label {
+                font-size: 0.9em;
+            }
+            
+            .error-message {
+                font-size: 0.9em;
+                padding: 10px 12px;
+            }
+            
+            .arrow {
+                left: -20px;
+                border-top: 20px solid transparent;
+                border-bottom: 20px solid transparent;
+                border-left: 40px solid #d4a5a5;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .wheel-container {
+                width: 85vw;
+                max-width: 300px;
+                height: 85vw;
+                max-height: 300px;
+            }
+            
+            .wheel-text {
+                font-size: 11px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .modal-content {
+                padding: 25px 15px;
+            }
+            
+            .checkbox-group label {
+                font-size: 0.85em;
+            }
+            
+            .comeback-message {
+                padding: 15px;
+            }
+            
+            .comeback-message p {
+                font-size: 0.95em;
+            }
+            
+            .countdown-timer {
+                font-size: 1.5em;
+            }
+            
+            .success-message {
+                padding: 20px 15px;
+            }
+            
+            .success-message h3 {
+                font-size: 1.3em;
+            }
+        }
+        
+        /* Prevent horizontal scroll */
+        body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+        
+        .container {
+            max-width: 100%;
+            overflow-x: hidden;
         }
     </style>
 </head>
@@ -332,41 +607,76 @@
     <!-- Modal Câștigător -->
     <div id="winnerModal" class="modal">
         <div class="modal-content winner">
+            <span class="modal-close" onclick="closeWinnerModal()">×</span>
             <div class="flower-emoji">🌸</div>
             <h2>Felicitări!</h2>
             <div class="prize" id="prizeText"></div>
-            <p style="margin: 25px 0; font-size: 1.05em;">Completează datele tale pentru a revendica premiul:</p>
             
-            <form id="winnerForm">
-                <div class="form-group">
-                    <label for="firstName">Nume:</label>
-                    <input type="text" id="firstName" required>
-                </div>
+            <div id="winnerFormContainer">
+                <p style="margin: 25px 0; font-size: 1.05em;">Completează datele tale pentru a revendica premiul:</p>
                 
-                <div class="form-group">
-                    <label for="lastName">Prenume:</label>
-                    <input type="text" id="lastName" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" required>
-                </div>
-                
-                <button type="submit" class="modal-button">Trimite</button>
-            </form>
+                <form id="winnerForm">
+                    <div id="errorMessage" class="error-message">
+                        ⚠️ Te rugăm să completezi toate câmpurile și să accepți termenii și condițiile.
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="firstName">Nume:</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Prenume:</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="termsCheckbox" required>
+                        <label for="termsCheckbox">
+                            Sunt de acord cu <a href="https://theflowerstation.ro/pages/termeni-si-conditii-roata-norocului" target="_blank">termenii și condițiile</a> campaniei Roata Norocului.
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="modal-button">Trimite</button>
+                </form>
+            </div>
+            
+            <div id="successMessage" class="success-message">
+                <h3>✅ Datele au fost trimise!</h3>
+                <p>Vei primi un email cu codul de reducere în maxim 24 de ore.</p>
+                <p style="font-size: 0.95em;">📧 Verifică inbox-ul și folderul spam.</p>
+            </div>
+            
+            <div class="comeback-message">
+                <p>🎰 Vrei să câștigi din nou?</p>
+                <p>Revino mâine pentru o nouă șansă!</p>
+                <div class="countdown-timer" id="winnerCountdown">00:00:00</div>
+            </div>
         </div>
     </div>
 
     <!-- Modal Necâștigător -->
     <div id="loserModal" class="modal">
         <div class="modal-content loser">
+            <span class="modal-close" onclick="closeLoserModal()">×</span>
             <div class="flower-emoji">🌿</div>
             <h2>Mulțumim pentru participare!</h2>
             <p style="font-size: 1.15em; margin: 25px 0; color: #666; line-height: 1.7;">
                 Din păcate, de această dată nu ai câștigat.<br>
-                Poate data viitoare ai mai mult noroc!
+                Dar nu te descuraja!
             </p>
+            
+            <div class="comeback-message">
+                <p>🎰 Încearcă din nou mâine!</p>
+                <p>Poate vei avea mai mult noroc.</p>
+                <div class="countdown-timer" id="loserCountdown">00:00:00</div>
+            </div>
+            
             <button class="modal-button" onclick="closeLoserModal()">Închide</button>
         </div>
     </div>
@@ -378,6 +688,71 @@
         const loserModal = document.getElementById('loserModal');
         const prizeText = document.getElementById('prizeText');
         const winnerForm = document.getElementById('winnerForm');
+
+        // ===== DAILY LIMIT SYSTEM =====
+        const STORAGE_KEY = 'tombolaLastSpin';
+        
+        function checkDailyLimit() {
+            const lastSpin = localStorage.getItem(STORAGE_KEY);
+            
+            if (!lastSpin) {
+                return { canSpin: true, timeLeft: 0 };
+            }
+            
+            const lastSpinDate = new Date(parseInt(lastSpin));
+            const now = new Date();
+            
+            // Calculate next midnight (00:00)
+            const nextMidnight = new Date(now);
+            nextMidnight.setHours(24, 0, 0, 0);
+            
+            // Check if last spin was today
+            const isToday = lastSpinDate.toDateString() === now.toDateString();
+            
+            if (isToday) {
+                const timeLeft = nextMidnight - now;
+                return { canSpin: false, timeLeft: timeLeft };
+            }
+            
+            return { canSpin: true, timeLeft: 0 };
+        }
+        
+        function formatTimeLeft(milliseconds) {
+            const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+            const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
+            
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        function updateSpinButton() {
+            const { canSpin, timeLeft } = checkDailyLimit();
+            
+            if (!canSpin) {
+                spinButton.disabled = true;
+                spinButton.textContent = `Revino în ${formatTimeLeft(timeLeft)}`;
+                
+                // Update countdown every second
+                const intervalId = setInterval(() => {
+                    const { canSpin: newCanSpin, timeLeft: newTimeLeft } = checkDailyLimit();
+                    
+                    if (newCanSpin) {
+                        spinButton.disabled = false;
+                        spinButton.textContent = 'Învârte Roata';
+                        clearInterval(intervalId);
+                    } else {
+                        spinButton.textContent = `Revino în ${formatTimeLeft(newTimeLeft)}`;
+                    }
+                }, 1000);
+            }
+        }
+        
+        function markSpinUsed() {
+            localStorage.setItem(STORAGE_KEY, Date.now().toString());
+        }
+        
+        // Check on page load
+        updateSpinButton();
 
         // Secțiunile roții - 10 secțiuni totale
         // Pentru 70% necâștigător: 7 secțiuni necâștigător, 3 secțiuni câștigător
@@ -405,8 +780,21 @@
         function spinWheel() {
             if (isSpinning) return;
             
+            // Check daily limit
+            const { canSpin } = checkDailyLimit();
+            if (!canSpin) {
+                alert('⏰ Ai folosit deja roata astăzi!\n\nRevino mâine pentru o nouă șansă la câștig.');
+                return;
+            }
+            
             isSpinning = true;
             spinButton.disabled = true;
+            
+            // Mark this spin as used
+            markSpinUsed();
+            
+            // Update button to show countdown
+            updateSpinButton();
 
             // Logica probabilistică: 70% necâștigător, 30% câștigător
             const random = Math.random();
@@ -517,22 +905,87 @@
             if (result.isWinner) {
                 prizeText.textContent = result.name;
                 winnerModal.style.display = 'block';
+                startCountdown('winnerCountdown');
             } else {
                 loserModal.style.display = 'block';
+                startCountdown('loserCountdown');
             }
+        }
+        
+        function startCountdown(elementId) {
+            const element = document.getElementById(elementId);
+            
+            function updateTimer() {
+                const { timeLeft } = checkDailyLimit();
+                element.textContent = formatTimeLeft(timeLeft);
+            }
+            
+            updateTimer();
+            const intervalId = setInterval(() => {
+                const { canSpin } = checkDailyLimit();
+                
+                if (canSpin) {
+                    element.textContent = '00:00:00';
+                    clearInterval(intervalId);
+                } else {
+                    updateTimer();
+                }
+            }, 1000);
         }
 
         function closeLoserModal() {
             loserModal.style.display = 'none';
+        }
+        
+        function closeWinnerModal() {
+            winnerModal.style.display = 'none';
+            winnerForm.reset();
+            
+            // Reset form visibility
+            document.getElementById('winnerFormContainer').style.display = 'block';
+            document.getElementById('successMessage').classList.remove('show');
+            document.getElementById('errorMessage').classList.remove('show');
         }
 
         // Form submission
         winnerForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const email = document.getElementById('email').value;
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const termsCheckbox = document.getElementById('termsCheckbox');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Reset error message
+            errorMessage.classList.remove('show');
+            
+            // Validation
+            if (!firstName || !lastName || !email) {
+                errorMessage.textContent = '⚠️ Te rugăm să completezi toate câmpurile obligatorii.';
+                errorMessage.classList.add('show');
+                
+                // Scroll to error message
+                errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                return;
+            }
+            
+            if (!termsCheckbox.checked) {
+                errorMessage.textContent = '⚠️ Trebuie să fii de acord cu termenii și condițiile pentru a continua.';
+                errorMessage.classList.add('show');
+                
+                // Scroll to checkbox
+                termsCheckbox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMessage.textContent = '⚠️ Te rugăm să introduci o adresă de email validă.';
+                errorMessage.classList.add('show');
+                return;
+            }
             
             const submitButton = winnerForm.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
@@ -567,20 +1020,20 @@
                     nume: firstName,
                     prenume: lastName,
                     email: email,
-                    premiu: prizeText.textContent
+                    premiu: prizeText.textContent,
+                    termeniAcceptati: true
                 });
                 
-                // Arată mesaj de succes
-                alert('🎉 Felicitări!\n\nDatele tale au fost înregistrate cu succes.\nVei primi un email cu detalii în maxim 24 de ore.\n\n✉️ Verifică inbox-ul (și folderul spam)!');
-                
-                winnerModal.style.display = 'none';
-                winnerForm.reset();
+                // Hide form and show success message
+                document.getElementById('winnerFormContainer').style.display = 'none';
+                document.getElementById('successMessage').classList.add('show');
                 
             } catch (error) {
                 console.error('❌ Error:', error);
-                alert('✅ Datele tale au fost salvate!\n\nVei primi un email cu detalii în curând.');
-                winnerModal.style.display = 'none';
-                winnerForm.reset();
+                
+                // Still show success (no-cors doesn't give us error feedback)
+                document.getElementById('winnerFormContainer').style.display = 'none';
+                document.getElementById('successMessage').classList.add('show');
             } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = originalText;
