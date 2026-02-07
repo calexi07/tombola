@@ -53,14 +53,14 @@
 
         .arrow {
             position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
             width: 0;
             height: 0;
-            border-left: 25px solid transparent;
-            border-right: 25px solid transparent;
-            border-top: 50px solid #d4a5a5;
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-left: 50px solid #d4a5a5;
             z-index: 10;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
         }
@@ -76,7 +76,7 @@
 
         .wheel-text {
             font-family: 'Lato', sans-serif;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             fill: #2c3e50;
             stroke: white;
@@ -264,60 +264,60 @@
             <div class="arrow"></div>
             <div class="wheel" id="wheel">
                 <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                    <!-- 10 sections wheel - Generated dynamically below -->
+                    <!-- Outer circle border -->
                     <circle cx="250" cy="250" r="248" fill="none" stroke="#d4a5a5" stroke-width="6"/>
                     
-                    <!-- Section 0: 15 lei -->
-                    <path d="M 250 250 L 250 2 A 248 248 0 0 1 479.4 129.8 Z" fill="#d4a5a5"/>
-                    <text x="350" y="80" class="wheel-text" transform="rotate(18 350 80)">15 lei</text>
-                    
-                    <!-- Section 1: Necâștigător -->
-                    <path d="M 250 250 L 479.4 129.8 A 248 248 0 0 1 479.4 370.2 Z" fill="#f5b5a8"/>
-                    <text x="430" y="250" class="wheel-text" transform="rotate(54 430 250)">Necâștigător</text>
-                    
-                    <!-- Section 2: 20 lei -->
-                    <path d="M 250 250 L 479.4 370.2 A 248 248 0 0 1 326.8 481.6 Z" fill="#e8bdc4"/>
-                    <text x="380" y="400" class="wheel-text" transform="rotate(90 380 400)">20 lei</text>
-                    
-                    <!-- Section 3: Necâștigător -->
-                    <path d="M 250 250 L 326.8 481.6 A 248 248 0 0 1 173.2 481.6 Z" fill="#f4d4c8"/>
-                    <text x="250" y="450" class="wheel-text" transform="rotate(126 250 450)">Necâștigător</text>
-                    
-                    <!-- Section 4: 25 lei -->
-                    <path d="M 250 250 L 173.2 481.6 A 248 248 0 0 1 20.6 370.2 Z" fill="#e8d5c4"/>
-                    <text x="120" y="400" class="wheel-text" transform="rotate(162 120 400)">25 lei</text>
-                    
-                    <!-- Section 5: Necâștigător -->
-                    <path d="M 250 250 L 20.6 370.2 A 248 248 0 0 1 20.6 129.8 Z" fill="#c89595"/>
-                    <text x="70" y="250" class="wheel-text" transform="rotate(198 70 250)">Necâștigător</text>
-                    
-                    <!-- Section 6: Cutie Roshen -->
-                    <path d="M 250 250 L 20.6 129.8 A 248 248 0 0 1 173.2 18.4 Z" fill="#b8927d"/>
-                    <text x="100" y="100" class="wheel-text" transform="rotate(234 100 100)">Cutie Roshen</text>
-                    
-                    <!-- Section 7: Necâștigător -->
-                    <path d="M 250 250 L 173.2 18.4 A 248 248 0 0 1 326.8 18.4 Z" fill="#d4bfd4"/>
-                    <text x="250" y="50" class="wheel-text" transform="rotate(270 250 50)">Necâștigător</text>
-                    
-                    <!-- Section 8: 10% -->
-                    <path d="M 250 250 L 326.8 18.4 A 248 248 0 0 1 479.4 129.8 Z" fill="#f5d4c8"/>
-                    <text x="400" y="100" class="wheel-text" transform="rotate(306 400 100)">10%</text>
-                    
-                    <!-- Section 9: 15% -->
-                    <path d="M 250 250 L 479.4 129.8 A 248 248 0 0 1 250 2 Z" fill="#e8c4d4"/>
-                    <text x="350" y="80" class="wheel-text" transform="rotate(342 350 80)">15%</text>
-                    
+                    <!-- Section 0: 15 lei (0° to 36°) -->
+                    <path d="M 250 250 L 250.0 2.0 A 248 248 0 0 1 395.8 49.4 Z" fill="#d4a5a5"/>
+                    <text x="299.8" y="96.7" class="wheel-text" transform="rotate(108 299.8 96.7)">15 lei</text>
+
+                    <!-- Section 1: Necâștigător (36° to 72°) -->
+                    <path d="M 250 250 L 395.8 49.4 A 248 248 0 0 1 485.9 173.4 Z" fill="#f5b5a8"/>
+                    <text x="380.4" y="155.2" class="wheel-text" transform="rotate(144 380.4 155.2)">Necâștigător</text>
+
+                    <!-- Section 2: 20 lei (72° to 108°) -->
+                    <path d="M 250 250 L 485.9 173.4 A 248 248 0 0 1 485.9 326.6 Z" fill="#e8bdc4"/>
+                    <text x="411.2" y="250.0" class="wheel-text" transform="rotate(180 411.2 250.0)">20 lei</text>
+
+                    <!-- Section 3: Necâștigător (108° to 144°) -->
+                    <path d="M 250 250 L 485.9 326.6 A 248 248 0 0 1 395.8 450.6 Z" fill="#f4d4c8"/>
+                    <text x="380.4" y="344.8" class="wheel-text" transform="rotate(216 380.4 344.8)">Necâștigător</text>
+
+                    <!-- Section 4: 25 lei (144° to 180°) -->
+                    <path d="M 250 250 L 395.8 450.6 A 248 248 0 0 1 250.0 498.0 Z" fill="#e8d5c4"/>
+                    <text x="299.8" y="403.3" class="wheel-text" transform="rotate(252 299.8 403.3)">25 lei</text>
+
+                    <!-- Section 5: Necâștigător (180° to 216°) -->
+                    <path d="M 250 250 L 250.0 498.0 A 248 248 0 0 1 104.2 450.6 Z" fill="#c89595"/>
+                    <text x="200.2" y="403.3" class="wheel-text" transform="rotate(288 200.2 403.3)">Necâștigător</text>
+
+                    <!-- Section 6: Cutie Roshen (216° to 252°) -->
+                    <path d="M 250 250 L 104.2 450.6 A 248 248 0 0 1 14.1 326.6 Z" fill="#b8927d"/>
+                    <text x="119.6" y="344.8" class="wheel-text" transform="rotate(324 119.6 344.8)">Cutie Roshen</text>
+
+                    <!-- Section 7: Necâștigător (252° to 288°) -->
+                    <path d="M 250 250 L 14.1 326.6 A 248 248 0 0 1 14.1 173.4 Z" fill="#d4bfd4"/>
+                    <text x="88.8" y="250.0" class="wheel-text" transform="rotate(360 88.8 250.0)">Necâștigător</text>
+
+                    <!-- Section 8: 10% (288° to 324°) -->
+                    <path d="M 250 250 L 14.1 173.4 A 248 248 0 0 1 104.2 49.4 Z" fill="#f5d4c8"/>
+                    <text x="119.6" y="155.2" class="wheel-text" transform="rotate(396 119.6 155.2)">10%</text>
+
+                    <!-- Section 9: 15% (324° to 360°) -->
+                    <path d="M 250 250 L 104.2 49.4 A 248 248 0 0 1 250.0 2.0 Z" fill="#e8c4d4"/>
+                    <text x="200.2" y="96.7" class="wheel-text" transform="rotate(432 200.2 96.7)">15%</text>
+
                     <!-- Separator lines -->
-                    <line x1="250" y1="250" x2="250" y2="2" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="479.4" y2="129.8" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="479.4" y2="370.2" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="326.8" y2="481.6" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="173.2" y2="481.6" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="20.6" y2="370.2" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="20.6" y2="129.8" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="173.2" y2="18.4" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="326.8" y2="18.4" stroke="#f4e4e9" stroke-width="3"/>
-                    <line x1="250" y1="250" x2="479.4" y2="129.8" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="250.0" y2="2.0" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="395.8" y2="49.4" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="485.9" y2="173.4" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="485.9" y2="326.6" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="395.8" y2="450.6" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="250.0" y2="498.0" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="104.2" y2="450.6" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="14.1" y2="326.6" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="14.1" y2="173.4" stroke="#f4e4e9" stroke-width="3"/>
+                    <line x1="250" y1="250" x2="104.2" y2="49.4" stroke="#f4e4e9" stroke-width="3"/>
                     
                     <!-- Center circle -->
                     <circle cx="250" cy="250" r="35" fill="white" stroke="#d4a5a5" stroke-width="4"/>
@@ -425,6 +425,9 @@
             console.log('🎯 Secțiunea aleasă:', winningSection, '=', sections[winningSection].name);
             
             // Calculăm unghiul central exact al secțiunii câștigătoare
+            // IMPORTANT: SVG-ul nostru e desenat cu 0° SUS (am transformat în calcule cu -90°)
+            // Dar trebuie să ținem cont că prima secțiune (index 0) începe la 0° în array nostru
+            // ceea ce corespunde cu 0° = SUS în SVG (după transformarea -90° în calcule)
             const sectionCenterAngle = (winningSection * degreesPerSection) + (degreesPerSection / 2);
             
             console.log('📍 Centru secțiune la:', sectionCenterAngle, '°');
@@ -433,11 +436,19 @@
             const fullRotations = 8 + Math.floor(Math.random() * 5);
             const baseRotation = fullRotations * 360;
             
-            // Rotația necesară pentru a aduce centrul la săgeată (0°)
-            // Pentru a aduce unghiul X la poziția 0°, rotim cu (360 - X)
-            const targetAlignment = 360 - sectionCenterAngle;
+            // SĂGEATA E LA STÂNGA = ceea ce înseamnă 270° în coordonate roată (nu 180°!)
+            // Explicație: Dacă 0° = SUS, atunci:
+            // - 90° = DREAPTA
+            // - 180° = JOS  
+            // - 270° = STÂNGA ← aici e săgeata!
             
-            console.log('🎯 Aliniere țintă:', targetAlignment, '° (pentru a aduce', sectionCenterAngle, '° la săgeată)');
+            // Pentru a aduce centrul secțiunii la săgeată (270°), rotim cu (270 - sectionCenterAngle)
+            let targetAlignment = 270 - sectionCenterAngle;
+            if (targetAlignment < 0) {
+                targetAlignment += 360;
+            }
+            
+            console.log('🎯 Aliniere țintă:', targetAlignment, '° (pentru a aduce', sectionCenterAngle, '° la săgeată stânga - 270°)');
             
             // Calculăm unde suntem acum (modulo 360)
             const currentAlignment = currentRotation % 360;
